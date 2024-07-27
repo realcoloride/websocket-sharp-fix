@@ -1411,6 +1411,12 @@ namespace WebSocketSharp
       return ret;
     }
 
+
+    /// <summary>
+    /// Custom headers when creating the handshake request
+    /// </summary>
+    public Dictionary<string, string> Headers;
+
     // As client
     private HttpRequest createHandshakeRequest ()
     {
@@ -1421,6 +1427,10 @@ namespace WebSocketSharp
       headers["Sec-WebSocket-Key"] = _base64Key;
       headers["Sec-WebSocket-Version"] = _version;
 
+      // headers patch
+      foreach (var header in Headers)
+        headers.Set(header.Key, header.Value);
+        
       if (!_origin.IsNullOrEmpty ())
         headers["Origin"] = _origin;
 
