@@ -1427,10 +1427,6 @@ namespace WebSocketSharp
       headers["Sec-WebSocket-Key"] = _base64Key;
       headers["Sec-WebSocket-Version"] = _version;
 
-      // headers patch
-      foreach (var header in Headers)
-        headers.Set(header.Key, header.Value);
-        
       if (!_origin.IsNullOrEmpty ())
         headers["Origin"] = _origin;
 
@@ -1456,7 +1452,11 @@ namespace WebSocketSharp
       if (_cookies.Count > 0)
         ret.SetCookies (_cookies);
 
-      return ret;
+        // headers patch
+        foreach (var header in Headers)
+            headers.Set(header.Key, header.Value);
+
+        return ret;
     }
 
     // As server
