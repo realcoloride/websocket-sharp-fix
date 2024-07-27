@@ -1579,6 +1579,7 @@ namespace WebSocketSharp
       _messageEventQueue = new Queue<MessageEventArgs> ();
       _forMessageEventQueue = ((ICollection) _messageEventQueue).SyncRoot;
       _readyState = WebSocketState.New;
+      Headers = new Dictionary<string, string>();
     }
 
     private void message ()
